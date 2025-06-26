@@ -159,17 +159,41 @@ const flights =
 //   🔴 Delayed Arrival from HEL to FAO (12h05)
 //            Departure from FAO to LIS (12h30)
 
+const op = function (msg) {
+  const sentences = msg.split("+");
+  // console.log(sentences);
+
+  const arr = [];
+
+  for (const sentence of sentences) {
+    // console.log(sentence);
+    const [info, from, to, time] = sentence.split(";");
+    const iok = info.slice(1).replace("_", " ");
+    const fok = from.slice(0, 3).toUpperCase();
+    const tok = to.slice(0, 3).toUpperCase();
+
+    console.log(
+      `${
+        iok.includes("Delayed") ? "😒 " : ""
+      }${iok} from ${fok} to ${tok} (${time})`
+    );
+  }
+};
+
+op(flights);
+
 const ok = function (msg) {
   const [uno, dos, tres, cuatro] = msg.split("+");
 
   const [info, from, to, time] = uno.split(";");
+  const iok = info.slice(1).replace("_", " ");
+  const fok = from.slice(0, 3).toUpperCase();
+  const tok = to.slice(0, 3).toUpperCase();
+
   // console.log(time);
   // console.log(from);
   // console.log(to);
   // console.log(time);
-  const iok = info.slice(1).replace("_", " ");
-  const fok = from.slice(0, 3).toUpperCase();
-  const tok = to.slice(0, 3).toUpperCase();
   // const tiok =
 
   // console.log(
@@ -207,4 +231,4 @@ const ok = function (msg) {
 
 // console.log("juan");
 
-ok(flights);
+// ok(flights);
