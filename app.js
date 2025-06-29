@@ -254,7 +254,7 @@ Here are your tasks:
   1.2. Based on the input number, update the a nswers array. For example, if the option is 3, increase the value AT POSITION 3 of the array by 1. Make sure to check if the input is a number and if the number makes sense (e.g answer 52 wouldn't make sense, right?) ---------------------------------------------------------------------------------
 2. Call this method whenever the user clicks the "Answer poll" button. ---------------------------
 3. Create a method 'displayResults' which displays the poll results. The method takes a string as an input (called 'type'), which can be either 'string' or 'array'. If type is 'array', simply display the results array as it is, using console.log(). This should be the default option. If type is 'string', display a string like "Poll results are 13, 2, 4, 1". 
-4. Run the 'displayResults' method at the end of each 'registerNewAnswer' method call.
+4. Run the 'displayResults' method at the end of each 'registerNewAnswer' method call.-----------
 
 HINT: Use many of the tools you learned about in this and the last section 😉
 
@@ -266,28 +266,76 @@ BONUS TEST DATA 2: [1, 5, 3, 9, 6, 1]
 GOOD LUCK 😀
 */
 
+// const poll = {
+//   question: "What is your favourite programming language?",
+//   options: ["0: JavaScript", "1: Python", "2: Rust", "3: C++"],
+//   answers: new Array(4).fill(0),
+
+//   registerNewAnswer() {
+//     const choice = Number(
+//       prompt(
+//         "What is your favourite programming language   0: JavaScript        1: Python        2: Rust        3: C++        (Write option number)"
+//       )
+//     );
+
+//     if (choice <= 3 && choice === 3) {
+//       // this.answers.push(choice);
+//       // console.log(this.answers);
+//       this.answers[3]++;
+//       // console.log(this.answers);
+//     }
+
+//     this.displayResults(this.answers);
+//   },
+
+//   displayResults(type) {
+//     if (typeof type === "object") {
+//       console.log(type);
+//     }
+
+//     if (typeof type === "string") {
+//       console.log("hi");
+//     }
+//   },
+// };
+
+// console.log(poll.answers);
+
 const poll = {
   question: "What is your favourite programming language?",
   options: ["0: JavaScript", "1: Python", "2: Rust", "3: C++"],
   answers: new Array(4).fill(0),
 
   registerNewAnswer() {
-    const choice = Number(
-      prompt(
-        "What is your favourite programming language   0: JavaScript        1: Python        2: Rust        3: C++        (Write option number)"
-      )
+    // Get answer
+    // First correction I should create a literal string passing the props question and options(these are an array so I should use a join method to convert from an array to string and the parameter should be new line \n)
+    const answer = Number(
+      prompt(`${this.question}\n${this.options.join("\n")}`)
     );
+    console.log(answer);
 
-    if (choice <= 3 && choice === 3) {
-      // this.answers.push(choice);
-      // console.log(this.answers);
-      this.answers[3]++;
+    // Register answer
+    // I don't need to add explicitly if to check the type of answer, I should pass in a dynamic way the extension of array (always avoid hard code things) using it's property length and I should use short circuiting to increase the number on the array
+    typeof answer === "number" &&
+      answer < this.answers.length &&
+      this.answers[answer]++;
+
+    this.displayResults();
+    this.displayResults("string");
+  },
+
+  // Display answer
+  // I should add a default value to type argument, I should add else if to convert the array to string using the join method
+  displayResults(type = "array") {
+    if (type === "array") {
       console.log(this.answers);
+    } else if (type === "string") {
+      console.log(`Poll results are ${this.answers.join(", ")}`);
     }
   },
 };
 
-console.log(poll.answers);
+// poll.registerNewAnswer();
 
 document
   .querySelector(".btn")
