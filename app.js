@@ -301,42 +301,67 @@ GOOD LUCK 😀
 
 // console.log(poll.answers);
 
-const poll = {
-  question: "What is your favourite programming language?",
-  options: ["0: JavaScript", "1: Python", "2: Rust", "3: C++"],
-  answers: new Array(4).fill(0),
+// const poll = {
+//   question: "What is your favourite programming language?",
+//   options: ["0: JavaScript", "1: Python", "2: Rust", "3: C++"],
+//   answers: new Array(4).fill(0),
 
-  registerNewAnswer() {
-    // Get answer
-    // First correction I should create a literal string passing the props question and options(these are an array so I should use a join method to convert from an array to string and the parameter should be new line \n)
-    const answer = Number(
-      prompt(`${this.question}\n${this.options.join("\n")}`)
-    );
-    console.log(answer);
+//   registerNewAnswer() {
+//     // Get answer
+//     // First correction I should create a literal string passing the props question and options(these are an array so I should use a join method to convert from an array to string and the parameter should be new line \n)
+//     const answer = Number(
+//       prompt(`${this.question}\n${this.options.join("\n")}`)
+//     );
+//     console.log(answer);
 
-    // Register answer
-    // I don't need to add explicitly if to check the type of answer, I should pass in a dynamic way the extension of array (always avoid hard code things) using it's property length and I should use short circuiting to increase the number on the array
-    typeof answer === "number" &&
-      answer < this.answers.length &&
-      this.answers[answer]++;
+//     // Register answer
+//     // I don't need to add explicitly if to check the type of answer, I should pass in a dynamic way the extension of array (always avoid hard code things) using it's property length and I should use short circuiting to increase the number on the array
+//     typeof answer === "number" &&
+//       answer < this.answers.length &&
+//       this.answers[answer]++;
 
-    this.displayResults();
-    this.displayResults("string");
-  },
+//     this.displayResults();
+//     this.displayResults("string");
+//   },
 
-  // Display answer
-  // I should add a default value to type argument, I should add else if to convert the array to string using the join method
-  displayResults(type = "array") {
-    if (type === "array") {
-      console.log(this.answers);
-    } else if (type === "string") {
-      console.log(`Poll results are ${this.answers.join(", ")}`);
-    }
-  },
-};
+//   // Display answer
+//   // I should add a default value to type argument, I should add else if to convert the array to string using the join method
+//   displayResults(type = "array") {
+//     if (type === "array") {
+//       console.log(this.answers);
+//     } else if (type === "string") {
+//       console.log(`Poll results are ${this.answers.join(", ")}`);
+//     }
+//   },
+// };
 
-// poll.registerNewAnswer();
+// // poll.registerNewAnswer();
 
-document
-  .querySelector(".btn")
-  .addEventListener("click", poll.registerNewAnswer.bind(poll));
+// document
+//   .querySelector(".btn")
+//   .addEventListener("click", poll.registerNewAnswer.bind(poll));
+
+///////////////////////////////////////
+// Coding Challenge #2
+
+/* 
+This is more of a thinking challenge than a coding challenge 🤓
+
+Take the IIFE below and at the end of the function, attach an event listener that changes the color of the selected h1 element ('header') to blue, each time the BODY element is clicked. Do NOT select the h1 element again!
+
+And now explain to YOURSELF (or someone around you) WHY this worked! Take all the time you need. Think about WHEN exactly the callback function is executed, and what that means for the variables involved in this example.
+
+GOOD LUCK 😀
+*/
+
+// /*
+(function () {
+  const header = document.querySelector("h1");
+  header.style.color = "red";
+
+  document.querySelector("body").addEventListener("click", function () {
+    header.style.color = "blue";
+    console.log("click");
+  });
+})();
+// */
