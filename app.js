@@ -1,60 +1,60 @@
-// const game = {
-//   team1: "team Munich",
-//   team2: "Borrussia Dortmund",
-//   players: [
-//     [
-//       "Neuer",
-//       "Pavard",
-//       "Martinez",
-//       "Alaba",
-//       "Davies",
-//       "Kimmich",
-//       "Goretzka",
-//       "Coman",
-//       "Muller",
-//       "Gnarby",
-//       "Lewandowski",
-//     ],
-//     [
-//       "Burki",
-//       "Schulz",
-//       "Hummels",
-//       "Akanji",
-//       "Hakimi",
-//       "Weigl",
-//       "Witsel",
-//       "Hazard",
-//       "Brandt",
-//       "Sancho",
-//       "Gotze",
-//     ],
-//   ],
-//   score: "4:0",
-//   scored: ["Lewandowski", "Gnarby", "Lewandowski", "Hummels"],
-//   date: "Nov 9th, 2037",
-//   odds: {
-//     team1: 1.33,
-//     x: 3.25,
-//     team2: 6.5,
-//   },
-// };
+const game = {
+  team1: "team Munich",
+  team2: "Borrussia Dortmund",
+  players: [
+    [
+      "Neuer",
+      "Pavard",
+      "Martinez",
+      "Alaba",
+      "Davies",
+      "Kimmich",
+      "Goretzka",
+      "Coman",
+      "Muller",
+      "Gnarby",
+      "Lewandowski",
+    ],
+    [
+      "Burki",
+      "Schulz",
+      "Hummels",
+      "Akanji",
+      "Hakimi",
+      "Weigl",
+      "Witsel",
+      "Hazard",
+      "Brandt",
+      "Sancho",
+      "Gotze",
+    ],
+  ],
+  score: "4:0",
+  scored: ["Lewandowski", "Gnarby", "Lewandowski", "Hummels"],
+  date: "Nov 9th, 2037",
+  odds: {
+    team1: 1.33,
+    x: 3.25,
+    team2: 6.5,
+  },
+};
 
-// // Solution 1
-// for (const [i, name] of game.scored.entries()) {
-//   console.log(`${name} ${i + 1}`);
-// }
+// Solution 1
+for (const [i, name] of game.scored.entries()) {
+  console.log(`${name} ${i + 1}`);
+}
 
-// // Solution 2
-// let avg = 0;
-// for (const odd of Object.values(game.odds)) {
-//   console.log(odd);
-//   avg += odd;
-// }
-// console.log(avg / Object.entries(game.odds).length);
+// Solution 2
+let avg = 0;
+for (const odd of Object.values(game.odds)) {
+  console.log(odd);
+  avg += odd;
+}
+console.log(avg / Object.entries(game.odds).length);
 
-// // Solution 3
-// for (const [team, odd] of Object.entries(game.odds))
-//   console.log(`odd of victory ${team}: ${odd}`);
+// Solution 3
+for (const [team, odd] of Object.entries(game.odds))
+  console.log(`odd of victory ${team}: ${odd}`);
 
 ///////////////////////////////////////
 // Coding Challenge #3
@@ -392,6 +392,8 @@ const kate = [4, 1, 15, 8, 3];
 
 const checkDogs = function (dogsJulia, dogsKate) {
   const corrected = [...dogsJulia.slice(1, -2)];
+  console.log(corrected);
+  console.log(dogsJulia);
   const complete = [...corrected, ...dogsKate];
 
   complete.forEach(function (dogAge, i) {
@@ -406,4 +408,35 @@ const checkDogs = function (dogsJulia, dogsKate) {
   });
 };
 
-checkDogs(julia, kate);
+// checkDogs(julia, kate);
+
+console.log("----------------------------------------------------------");
+
+// Coding Challenge #2
+
+/* 
+Let's go back to Julia and Kate's study about dogs. This time, they want to convert dog ages to human ages and calculate the average age of the dogs in their study.
+
+Create a function 'calcAverageHumanAge', which accepts an arrays of dog's ages ('ages'), and does the following things in order:
+
+1. Calculate the dog age in human years using the following formula: if the dog is <= 2 years old, humanAge = 2 * dogAge. If the dog is > 2 years old, humanAge = 16 + dogAge * 4.
+2. Exclude all dogs that are less than 18 human years old (which is the same as keeping dogs that are at least 18 years old)
+3. Calculate the average human age of all adult dogs (you should already know from other challenges how we calculate averages 😉)
+4. Run the function for both test datasets
+
+TEST DATA 1: [5, 2, 4, 1, 15, 8, 3]
+TEST DATA 2: [16, 6, 10, 5, 6, 1, 4]
+
+GOOD LUCK 😀
+*/
+
+const calcAverageHumanAge = function (ages) {
+  const ageOk = ages.map((age) => (age <= 2 ? age * 2 : 16 + age * 4));
+  const exclude = ageOk.filter((age) => age >= 18);
+  const avg = exclude.reduce((acc, age) => acc + age, 0) / exclude.length;
+  // return ageOk;
+  // return exclude;
+  return avg;
+};
+
+console.log(calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]));
