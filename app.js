@@ -620,26 +620,46 @@ DATA CAR 2: 'Mercedes' going at 95 km/h
 GOOD LUCK 😀
 */
 
-const Car = function (make, speed) {
-  this.make = make;
-  this.speed = speed;
-};
+// const Car = function (make, speed) {
+//   this.make = make;
+//   this.speed = speed;
+// };
 
-Car.prototype.accelerate = function () {
-  this.speed += 10;
-  console.log(this.speed);
-};
+// Car.prototype.accelerate = function () {
+//   this.speed += 10;
+//   console.log(this.speed);
+// };
 
-Car.prototype.brake = function () {
-  console.log(this.speed - 5);
-};
+// Car.prototype.brake = function () {
+//   console.log(this.speed - 5);
+// };
 
-const mustang = new Car("ford", 95);
-const ferrari = new Car("ferrari", 120);
+// const mustang = new Car("ford", 95);
+// const ferrari = new Car("ferrari", 120);
 
-mustang.accelerate();
-mustang.accelerate();
-mustang.accelerate();
-mustang.brake();
-ferrari.accelerate();
-ferrari.brake();
+class Car {
+  constructor(make, speed) {
+    (this.make = make), (this.speed = speed);
+  }
+
+  accelerate() {
+    console.log((this.speed += 10));
+  }
+
+  brake() {
+    console.log((this.speed -= 5));
+  }
+
+  get speedUS() {
+    return this.speed / 1.6;
+  }
+
+  set speedUS(speed) {
+    this.speed = speed * 1.6;
+  }
+}
+
+const ford = new Car("ford", 100);
+
+ford.speedUS = 50;
+console.log(ford);
